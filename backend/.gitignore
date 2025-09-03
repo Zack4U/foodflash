@@ -39,3 +39,5 @@ coverage/
 
 # Scripts output
 *.out
+
+run.bash
