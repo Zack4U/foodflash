@@ -1,0 +1,6 @@
+# Include only the main structure for frontend
+!/public/
+!/src/
+!/src/components/
+!/src/services/
+!/README.md

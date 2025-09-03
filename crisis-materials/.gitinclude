@@ -1,0 +1,6 @@
+# Include all subfolders for crisis-materials
+!/dashboards/
+!/dashboards/**
+!/logs/
+!/logs/**
+!/README.md
