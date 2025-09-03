@@ -1,17 +1,18 @@
+// backend/src/middleware/rateLimiter.js
 const rateLimit = require('express-rate-limit');
-// Rate limiter muy restrictivo (parte del problema)
+
 const limiter = rateLimit({
-  windowMs: parseInt(process.env.RATE_LIMIT_WINDOW) || 60000, // 1 minuto
-  max: parseInt(process.env.RATE_LIMIT_REQUESTS) || 100, // Solo 100 requests por minuto
+  windowMs: parseInt(process.env.RATE_LIMIT_WINDOW, 10) || 1 * 60 * 1000, // 1 min
+  max: parseInt(process.env.RATE_LIMIT_REQUESTS, 10) || 500, // más permisivo
   message: {
-    error: 'Too many requests from this IP',
-    retryAfter: '1 minute'
+    error: 'Too many requests, please try again later'
   },
   standardHeaders: true,
   legacyHeaders: false,
   handler: (req, res, next, options) => {
-    console.warn();
+    console.warn(`🚨 Rate limit exceeded for IP: ${req.ip}`);
     res.status(options.statusCode).json(options.message);
   }
 });
+
 module.exports = limiter;
